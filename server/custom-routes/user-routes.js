@@ -90,9 +90,9 @@ export default {
           })
       }
   },
-   inviteToBoard: {
+  inviteToBoard: {
        path: '/boards/:id/invite',
-       reqType: 'post',
+       reqType: 'put',
        method(req, res, next){
            let action = "Invite your friends"
             Users.find({email: req.body.email})
@@ -109,8 +109,8 @@ export default {
          return next(handleResponse(action, null, error))
        })
    }
+  },
 }
-
 
 function handleResponse(action, data, error) {
   var response = {
