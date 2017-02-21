@@ -7,7 +7,7 @@ var schema = new mongoose.Schema({
   description: { type: String },
   created: { type: Number, default: Date.now() },
   creatorId: {type: ObjectId, ref: models.user.name},
-  collaborators: {type: ObjectId, ref: models.user.name}
+  collaborators: [{type: ObjectId, ref: models.user.name}]
 });
 
 
