@@ -12,11 +12,9 @@ function API(model, schema) {
   }
 
   function get(req, res, next) {
-    console.log("requesting api ", models.name)
     var id = req.params.id || req.query.id || '';
     var params = req.params.id ? req.params : {};
     var query = req.query.with || '';
-    console.log(query)
 
     if (id) {
       schema.findById(id)
