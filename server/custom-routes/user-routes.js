@@ -33,7 +33,7 @@ export default {
           return next(handleResponse(action, null, error))
         })
     }
-},
+  },
   listTasks: {
     path: '/lists/:id/tasks',
     reqType: 'get',
@@ -90,9 +90,26 @@ export default {
           })
       }
   },
-
+   inviteToBoard: {
+       path: '/boards/:id/invite',
+       reqType: 'post',
+       method(req, res, next){
+           let action = "Invite your friends"
+            Users.find({email: req.body.email})
+       .then(user => {
+            Boards.findById(req.params.id)
+            .then(board => {
+                board.collaborators.push(user._id)
+                board.save()
+                .then(()=>{
+                res.send(handleResponse(action, board))
+               })
+            })
+       }).catch(error => {
+         return next(handleResponse(action, null, error))
+       })
+   }
 }
-
 
 
 function handleResponse(action, data, error) {
