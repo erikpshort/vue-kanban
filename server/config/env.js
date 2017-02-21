@@ -3,12 +3,13 @@ let env = {
 	NODE_ENV: 'development',
 	PORT: 3000,
 	DBPROTOCOL: 'mongodb',
-	DBUSERNAME: 'student',
-	DBPASSWORD: 'CodeWorksStudent',
-	DBHOST: 'ds056789.mlab.com:56789',
-	DBNAME: 'codeworks',
+	DBUSERNAME: 'tester',
+	DBPASSWORD: 'testing',
+	DBHOST: 'ds054298.mlab.com:54298',
+	DBNAME: 'kanban',
 	SERVERNAME: 'dev-server'
 }
+// mongodb://<dbuser>:<dbpassword>@ds054298.mlab.com:54298/kanban
 
 // MAPS env TO ACTUAL ENVIRONMENT
 if (process.env.NODE_ENV == 'development') {

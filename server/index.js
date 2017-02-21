@@ -3,7 +3,6 @@ import server from './config/dev-server'
 let mongoose = require('mongoose')
 let connection = mongoose.connection;
 
-
 // Establishes MongoDb Connection
 mongoose.connect(process.env.CONNECTIONSTRING, {
 	server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
@@ -17,3 +16,4 @@ connection.once('open', function () {
 		console.log(`Running on port: ${process.env.PORT}`);
 	})
 });
+
