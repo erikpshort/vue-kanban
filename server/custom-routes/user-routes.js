@@ -4,6 +4,7 @@ let Tasks = require('../models/task')
 let Comments = require('../models/comment')
 let Activities = require('../models/activity')
 let Checklists = require('../models/checklist')
+let Users = require('../models/user')
 
 
 export default {
@@ -110,6 +111,20 @@ export default {
        })
    }
   },
+sharedBoards: {
+    path: '/sharedBoards',
+    reqType: 'get',
+    method(req, res, next){
+    let action = "Get All collaboratoring boards"
+      console.log(req)
+      Boards.find({ collaborators: { $in: [req.headers.session] }})
+        .then(boards => {
+          res.send(handleResponse(action, boards))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  }
 }
 
 function handleResponse(action, data, error) {
