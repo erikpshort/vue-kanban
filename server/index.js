@@ -1,4 +1,4 @@
-import server from './config/dev-server'
+import {server} from './config/dev-server'
 
 let mongoose = require('mongoose')
 let connection = mongoose.connection;
@@ -16,4 +16,3 @@ connection.once('open', function () {
 		console.log(`Running on port: ${process.env.PORT}`);
 	})
 });
-
