@@ -10,11 +10,16 @@
             </div>
             <div class="col s12 m4">
                 <div class="card-panel grey">
-                    <span class="white-text">+ Board
+                    <span class="white-text" v-on:click="show = !show">+ Board
                     </span>
+                    <transition name="fade">
+                        <div class="row center" v-if="show">
+                        </div>
+                    </transition>
                 </div>
             </div>
         </div>
+
         <!--<div class="row">
             <h1 v-if="collab" class="center">Collaborating Boards</h1>
             <div class="col s12 m4" v-for="(board, i) in collab">
@@ -39,16 +44,21 @@
 <script>
     export default {
         name: 'boards',
-        mounted(){
+        data() {
+            return {
+                show: false
+            }
+        },
+        mounted() {
             this.$root.$data.store.actions.getUserBoards()
         },
-        computed:{
-            userBoards(){
+        computed: {
+            userBoards() {
                 return this.$root.$data.store.state.userBoards
             }
         },
-        methods:{
-            createBoard(){
+        methods: {
+            createBoard() {
                 this.$root.$data.store.actions.getUserBoards()
             }
         }
@@ -63,4 +73,6 @@
     .center {
         text-align: center
     }
+    
+
 </style>
