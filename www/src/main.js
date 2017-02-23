@@ -4,6 +4,16 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import io from 'socket.io-client'
+// import axios from 'axios'
+import store from './store'
+
+
+
+// window.api = axios.create({
+//   baseURL: 'http://localhost:3000/api/',
+//   timeout: 1000,
+//   witheCredentials: true
+// })
 
 // let socket = io('http://localhost:3000')
 
@@ -23,5 +33,8 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  data:{
+    store
+  }
 })
