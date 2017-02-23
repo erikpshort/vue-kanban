@@ -5,7 +5,7 @@ let Comments = require('../models/comment')
 let Activities = require('../models/activity')
 let Checklists = require('../models/checklist')
 let Users = require('../models/user')
-
+let io = require('socket.io')
 
 export default {
   userBoards: {

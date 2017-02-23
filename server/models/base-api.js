@@ -1,4 +1,9 @@
 import { actions, models } from '../config/constants'
+import Sock from '../config/sockets'
+import {ioon} from '../config/dev-server'
+
+
+
 
 export default API
 
@@ -12,6 +17,7 @@ function API(model, schema) {
   }
 
   function get(req, res, next) {
+    ioon()
     var id = req.params.id || req.query.id || '';
     var params = req.params.id ? req.params : {};
     var query = req.query.with || '';
