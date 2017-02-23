@@ -29,11 +29,12 @@ export default new Router({
       path: '/boards',
       name: 'boards',
       component: Board
-    },    {
-      path: '/lists',
-      name: 'lists',
-      component: List
     },
+    //     {
+    //   path: '/lists',
+    //   name: 'lists',
+    //   component: List
+    // },
 
   ]
 })
