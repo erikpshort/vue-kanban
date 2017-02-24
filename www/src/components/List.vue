@@ -1,12 +1,13 @@
 <template>
     <div>
-        <h1>hello</h1>
-        <ul class="collection with-header" v-for="(list, i) in lists">
-            <li class="collection-header">
-                <h4>First Names</h4>
-            </li>
-            <li class="collection-item">{{list.name}}</li>
-        </ul>
+        <div class="col xs12 s6 m2" v-for="(list, i) in lists">
+            <div class="card-panel teal">
+                <span class="white-text">{{list.name}}
+                    </span>
+                <a class="waves-effect amber darken-4 btn-flat" id="right" @click="deleteList(list)">Del</a>
+            </div>
+        </div>
+        <listForm></listForm>
     </div>
 </template>
 
@@ -14,22 +15,20 @@
 
 
 <script>
+import listForm from './ListForm'
     export default {
         name: 'lists',
-        data() {
-            return {
-                lists: [
-                    {
-                        "name": 'Back Log',
-                        "tasks": ['Task 1', 'Task 2', 'Task 3']
-                    }, {
-                        "name": 'Ready',
-                        "tasks": ['Task 1', 'Task 2', 'Task 3']
-                    }, {
-                        "name": 'In Progress',
-                        "tasks": ['Task 1', 'Task 2', 'Task 3']
-                    }
-                ],
+        components:{ listForm },
+        computed: {
+            lists() {
+                return this.$root.$data.store.state.lists
+            }
+        },
+        methods:{
+            deleteList(list){
+                var x = list._id
+                var y = list.boardId
+                this.$root.$data.store.actions.deleteList(x, y)
             }
         }
     }

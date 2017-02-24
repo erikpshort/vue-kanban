@@ -114,9 +114,10 @@ export default {
     reqType: 'get',
     method(req, res, next) {
       let action = "Get All collaboratoring boards"
-      console.log(req)
-      Boards.find({ collaborators: { $in: [req.headers.session] } })
+      console.log(req.session.uid)
+      Boards.find({ collaborators: { $in: [req.session.uid] } })
         .then(boards => {
+
           res.send(handleResponse(action, boards))
         }).catch(error => {
           return next(handleResponse(action, null, error))

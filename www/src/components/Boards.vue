@@ -2,39 +2,17 @@
     <div id="boards">
         <div class="row">
             <h1 class="center">Your Boards</h1>
-            <div class="col s12 m4" v-for="(board, i) in userBoards">
-                <div class="card-panel teal">
+            <div class="col xs12 s6 m2" v-for="(board, i) in userBoards">
+                <router-link :to="'/board'"><div class="card-panel teal" @click="getBoard(board)">
                     <span class="white-text">{{board.name}}
                     </span>
+                    <a class="waves-effect amber darken-4 btn-flat" id="right" @click="deleteBoard(board)">Del</a>
                 </div>
+                </router-link>
             </div>
-            <div class="col s12 m4">
-                <div class="card-panel grey">
-                    <span class="white-text" v-on:click="show = !show">+ Board
-                    </span>
-                    <transition name="fade">
-                        <div class="row center" v-if="show">
-                        </div>
-                    </transition>
-                </div>
-            </div>
+           <boardForm></boardForm>
         </div>
-
-        <!--<div class="row">
-            <h1 v-if="collab" class="center">Collaborating Boards</h1>
-            <div class="col s12 m4" v-for="(board, i) in collab">
-                <div class="card-panel teal">
-                    <span class="white-text">{{board.name}}
-                    </span>
-                </div>
-            </div>
-            <div class="col s12 m4">
-                <div class="card-panel grey">
-                    <span class="white-text">+ Board
-                    </span>
-                </div>
-            </div>
-        </div>-->
+        <collab></collab>
     </div>
 </template>
 
@@ -42,24 +20,36 @@
 
 
 <script>
+    import boardForm from './BoardForm'
+    import collab from './CollabBoards'
     export default {
         name: 'boards',
-        data() {
-            return {
-                show: false
-            }
-        },
+        components: { boardForm, collab },
         mounted() {
             this.$root.$data.store.actions.getUserBoards()
         },
         computed: {
             userBoards() {
                 return this.$root.$data.store.state.userBoards
-            }
+            },
+
         },
         methods: {
+            getBoard(board){
+                var x = board._id
+                this.$root.$data.store.actions.getBoard(x)
+                console.log(board)
+                this.$root.$data.store.actions.getLists(x)
+                
+            },
             createBoard() {
                 this.$root.$data.store.actions.getUserBoards()
+            },
+            deleteBoard(board) {
+
+                let x = board._id
+                this.$root.$data.store.actions.deleteBoard(x)
+                
             }
         }
     }
@@ -74,5 +64,7 @@
         text-align: center
     }
     
-
+    #right {
+        float: right;
+    }
 </style>
