@@ -14,6 +14,7 @@ api.post('http://localhost:3000/login', {
 
 //REGISTER ALL DATA HERE
 let state = {
+    showNewBoardForm: false,
     boards: [],
     activeBoard: [],
     lists: [],
@@ -22,7 +23,9 @@ let state = {
     activities: [],
     checklists: [],
     userBoards:[],
-    error: {}
+    collabBoards: [],
+    error: {},
+    
 }
 
 let handleError = (err) => {
@@ -35,6 +38,12 @@ export default {
     state,
     //ACTIONS ARE RESPONSIBLE FOR MAKING ALL ASYNC CALLS
     actions: {
+        getCollabBoards(){
+            api('sharedBoards').then(res => {
+                state.collabBoards = res.data.data
+                console.log(res.data.data)
+            }).catch(handleError)
+        },
         getUserBoards() {
             api('userboards').then(res => {
                 state.userBoards = res.data.data
@@ -53,14 +62,14 @@ export default {
                 })
                 .catch(handleError)
         },
-        createBoard(id) {
-            api.post('boards/' + id, board)
+        createBoard(board) {
+            api.post('boards', board)
                 .then(res => {
                     this.getUserBoards()
                 })
                 .catch(handleError)
         },
-        changeBoard(id){
+        changeBoard(id, board){
             api.put('boards/' + id, board)
             .then(res => {
                 this.getUserBoards()
@@ -73,21 +82,24 @@ export default {
             })
         },
         //TO HERE
-        getLists() {
-            api('lists').then(res => {
-                state.lists = res.data.data
-            }).catch(handleError)
-        },
-        getList(id) {
-            api('lists/' + id)
+        // getLists() {
+        //     api('lists').then(res => {
+        //         state.lists = res.data.data
+        //     }).catch(handleError)
+        // },
+        getLists(id) {
+            console.log("hello-1")
+            api('boards/' + id + '/lists')
                 .then(res => {
+                    console.log('hello')
+                    state.lists = res.data.data
                 })
                 .catch(handleError)
         },
-        createList(id) {
-            api.post('lists/' + id, list)
+        createList(list) {
+            api.post('lists', list)
                 .then(res => {
-                    this.getList()
+                    this.getLists(list.boardId)
                 })
                 .catch(handleError)
         },
@@ -95,12 +107,12 @@ export default {
             api.put('lists/' + id, list)
             .then(res => {
                 this.getLists()
-            })
+            }).catch(handleError)
         },
-        deleteList(id){
+        deleteList(id, boardId){
             api.delete('lists/' + id)
             .then(res=>{
-                this.getLists()
+                this.getLists(boardId)
             })
             .catch(handleError)
         },

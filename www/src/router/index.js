@@ -5,16 +5,17 @@ import Reg from 'components/Registration'
 import Login from 'components/Login'
 import Boards from 'components/Boards'
 import List from 'components/List'
+import Board from 'components/Board'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
+    // {
+    //   path: '/',
+    //   name: 'home',
+    //   component: Home
+    // },
     {
       path: '/register',
       name: 'register',
@@ -26,9 +27,14 @@ export default new Router({
       component: Login
     },
     {
-      path: '/boards',
+      path: '/',
       name: 'boards',
       component: Boards
+    },
+    {
+      path: '/board',
+      name: 'board',
+      component: Board
     },
     //     {
     //   path: '/lists',
