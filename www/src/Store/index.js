@@ -62,6 +62,9 @@ export default {
                 })
                 .catch(handleError)
         },
+        setBoard(board){
+            state.activeBoard = board
+        },
         createBoard(board) {
             api.post('boards', board)
                 .then(res => {
@@ -116,14 +119,17 @@ export default {
             })
             .catch(handleError)
         },
-        getTasks() {
-            api('tasks').then(res => {
-                state.tasks = res.data.data
-            }).catch(handleError)
-        },
-        getTask(id) {
-            api('tasks/' + id)
+        // getTasks() {
+        //     api('tasks').then(res => {
+        //         state.tasks = res.data.data
+        //     }).catch(handleError)
+        // },
+        getTasks(id) {
+            api('boards/' + id + '/tasks' )
                 .then(res => {
+                    debugger
+                    state.tasks = res.data.data
+                    console.log(state.tasks)
                 })
                 .catch(handleError)
         },

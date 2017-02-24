@@ -4,7 +4,6 @@ import Home from 'components/Home'
 import Reg from 'components/Registration'
 import Login from 'components/Login'
 import Boards from 'components/Boards'
-import List from 'components/List'
 import Board from 'components/Board'
 
 Vue.use(Router)

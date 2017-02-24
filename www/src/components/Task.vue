@@ -1,8 +1,10 @@
  <template>
-    <div>
-        <ul class="collection with-header" v-for="(task, i) in tasks">
+     <div>
+    <div class="card-panel white">
+        <ul class="collection with-header">
             <li class="collection-item">{{task.name}}</li>
         </ul>
+    </div>
     </div>
 </template>
 
@@ -12,10 +14,12 @@
 <script>
     export default {
         name: 'tasks',
+        props:[ 'list', 'task' ],
         computed:{
-            tasks(){
-                return this.$root.$data.store.state.tasks
-            }
+
+        },
+        mounted(){
+            console.log(list)
         }
     }
 
@@ -27,4 +31,4 @@
 <style>
 
 </style>
->>>>>>> 4c3eeb86c2481ec0eb8c7576ed59868aaa73b219
+

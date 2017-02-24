@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <error></error>
     <navBar></navBar>
     <router-view></router-view>
@@ -20,6 +20,7 @@
 
 <style>
   #app {
+    font-size:10px;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

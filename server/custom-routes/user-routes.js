@@ -36,12 +36,12 @@ export default {
     }
   },
   listTasks: {
-    path: '/lists/:id/tasks',
+    path: '/boards/:id/tasks',
     reqType: 'get',
     method(req, res, next) {
       let action = 'Find Lists Tasks'
       console.log(req.params.id)
-      Tasks.find({ listId: req.params.id })
+      Tasks.find({ boardId: req.params.id })
         .then(data => {
           res.send(handleResponse(action, data))
         }).catch(error => {
@@ -170,7 +170,8 @@ export default {
           return next(handleResponse(action, null, error))
         })
     }
-  }
+  },
+
 }
 
 function handleResponse(action, data, error) {
