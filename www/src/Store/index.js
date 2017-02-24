@@ -118,7 +118,7 @@ export default {
         createTask(id) {
             api.post('tasks/' + id, task)
                 .then(res => {
-                    this.getTask()
+                    this.getTasks()
                 })
                 .catch(handleError)
         },

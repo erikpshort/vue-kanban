@@ -1,17 +1,19 @@
 <template>
   <div>
     <error></error>
+    <navBar></navBar>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
   import error from './components/error'
+  import navBar from './components/nav'
 
   export default {
 
     name: 'app',
-    components: {error}
+    components: {error, navBar}
   }
 
 </script>
