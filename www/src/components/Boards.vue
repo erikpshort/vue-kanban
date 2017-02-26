@@ -37,7 +37,7 @@
         methods: {
             getBoard(board){
                 this.$root.$data.store.actions.setBoard(board)
-                debugger
+                
                 router.push('/board')
             },
             createBoard() {

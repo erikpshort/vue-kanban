@@ -1,9 +1,8 @@
 <template>
     <div id="boards">
-        <div class="row">
+        <div>
             <h1 class="center">{{activeBoard.name}}</h1>
             <lists :board="activeBoard"></lists>
-            
         </div>
     </div>
 </template>
@@ -13,6 +12,7 @@
 
 <script>
 import lists from './Lists'
+
     export default {
         name: 'board',
         components: {lists},

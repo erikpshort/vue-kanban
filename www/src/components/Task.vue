@@ -1,6 +1,6 @@
  <template>
      <div>
-    <div class="card-panel white">
+    <div class="card-panel white black-text">
         <ul class="collection with-header">
             <li class="collection-item">{{task.name}}</li>
         </ul>
@@ -14,13 +14,10 @@
 <script>
     export default {
         name: 'tasks',
-        props:[ 'list', 'task' ],
+        props:[ 'task' ],
         computed:{
 
         },
-        mounted(){
-            console.log(list)
-        }
     }
 
 </script>

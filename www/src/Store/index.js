@@ -127,16 +127,18 @@ export default {
         getTasks(id) {
             api('boards/' + id + '/tasks' )
                 .then(res => {
-                    debugger
+                    
                     state.tasks = res.data.data
                     console.log(state.tasks)
                 })
                 .catch(handleError)
         },
-        createTask(id) {
-            api.post('tasks/' + id, task)
+        createTask(task) {
+            api.post('tasks/', task)
                 .then(res => {
-                    this.getTasks()
+                    console.log(task)
+                    console.log(task.boardId)
+                    this.getTasks(task.boardId)
                 })
                 .catch(handleError)
         },

@@ -1,14 +1,14 @@
 <template>
-    <div class="col xs12 s6 m2">
         <div class="card-panel grey">
-            <p class="white-text" v-on:click="showthing = !showthing">+ List</p>
+            <span class="white-text" v-on:click="show = !show">+ Task
+                    </span>
             <transition name="bounce">
-                <div class="row center" v-if="showthing">
-                    <form class="col s12" @submit.prevent="createBoardList(name)" type="submit">
+                <div class="row center" v-if="show">
+                    <form class="col s12" @submit.prevent="createTask(name)" type="submit">
                         <div class="row">
                             <div class="input-field col s12">
-                                <div class="card-panel white">
-                                    <input type="text" placeholder="New List Name" v-model="name">
+                                <div class="card-panel white black-text">
+                                    <input type="text" placeholder="New Task Name" v-model="name">
                                 </div>
                             </div>
                         </div>
@@ -16,41 +16,33 @@
                 </div>
             </transition>
         </div>
-    </div>
 </template>
 
 <script>
     export default {
-        name: 'listForm',
+        name: 'taskForm',
+        props:['list'],
         data() {
             return {
                 name: '',
-                showthing: false,
-
+                show: false
             }
         },
         methods: {
-            createBoardList(name) {
-                console.log(name)
-                this.$root.$data.store.actions.createList({ name: this.name, boardId: this.activeBoard._id })
+            createTask(name) {
+                debugger
+                console.log(this.list, this.activeBoard)
+                this.$root.$data.store.actions.createTask({ name: this.name, boardId: this.activeBoard._id, listId: this.list._id })
+                this.show = false
                 this.name = ''
-                this.$parent.getListsAgain
-            },
-            showStuff() {
-                console.log('showStuff')
-                if (this.showthing === false) {
-                    return this.showthing = true
-                } else {
-                    this.showthing = false
-                }
             }
 
         },
         computed: {
-            activeBoard() {
+            activeBoard(){
                 return this.$root.$data.store.state.activeBoard
             }
-        },
+        }
     }
 
 </script>

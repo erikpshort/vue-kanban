@@ -2,17 +2,24 @@
     <div>
         <nav class="red darken-4">
             <div class="nav-wrapper">
-                <div v-if="!is_loggedIn">
-                    <a href="#" class="brand-logo black-text"><strong>Jello</strong></a>
+                <div>
+                    <router-link :to="'/'"><a class="brand-logo black-text"><strong>Jello</strong></a></router-link>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="localhost:3000/#/login" class="black-text"><strong>Log In</strong></a></li>
-                        <li><a href="localhost:3000/#/register" class="black-text"><strong>Register</strong></a></li>
-                </div>
-                <div v-if="is_loggedIn">
-                    <a href="#" class="brand-logo black-text"><strong>Jello</strong></a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="localhost:3000/#/api/boards">Boards</a></li>
-                        <li><a href="#">Log Out</a></li>
+                        <li v-if="!is_loggedIn">
+                            <router-link :to="'/login'">
+                                <strong>Log In</strong>
+                            </router-link>
+                        </li>
+                        <li  v-if="is_loggedIn">
+                            <router-link :to="'/login'">
+                                <strong>Log Out</strong>
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link :to="'/register'">
+                                <strong>Register</strong>
+                            </router-link>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -25,7 +32,7 @@
         name: 'navBar',
         data() {
             return {
-                is_loggedIn: false
+                is_loggedIn: document.cookie
             }
         }
     }
