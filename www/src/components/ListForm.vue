@@ -8,6 +8,7 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <div class="card-panel white">
+                                    
                                     <input type="text" placeholder="New List Name" v-model="name">
                                 </div>
                             </div>
