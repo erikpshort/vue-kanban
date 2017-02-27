@@ -1,13 +1,14 @@
 <template>
-    <div class="col xs12 s6 m2">
+    <div class="col xs12 s6 m2" droppable="true" v-on:drop.capture="addTask" ondragover="event.preventDefault()">
         <div class="card-panel teal white-text">
             <span>{{list.name}}
                     </span>
-            <a class="waves-effect amber darken-4 btn-flat" id="right" @click="deleteList(list)">Del</a>
+
             <br>
             <br>
-            <task v-for="(task, i) in tasks" :task="task"></task>
+            <task v-for="(task, i) in tasks" :task="task" draggable="true" v-on:dragstart.capture="moving"></task>
             <taskForm :list="list"></taskForm>
+            <a class="right black-text" @click="deleteList(list)">Delete List</a>
         </div>
     </div>
 </template>
@@ -32,6 +33,13 @@
             },
         },
         methods: {
+            addTask(event) {
+                var task = JSON.parse(event.dataTransfer.getData('text/javascript'))
+                var id = task._id
+                var object = { listId: this.list._id}
+                var boardId = this.list.boardId
+                this.$root.$data.store.actions.changeTask(boardId, object, id)
+            },
             deleteList(list) {
                 var x = list._id
                 var y = list.boardId
@@ -50,5 +58,8 @@
 
 
 <style>
-
+    .right {
+        float: right;
+        bottom: 0
+    }
 </style>

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 let api = axios.create({
     baseURL: 'http://localhost:3000/api/',
-    timeout: 2000,
+    timeout: 20000,
     withCredentials: true
 
 })
@@ -41,7 +41,6 @@ export default {
         getCollabBoards(){
             api('sharedBoards').then(res => {
                 state.collabBoards = res.data.data
-                console.log(res.data.data)
             }).catch(handleError)
         },
         getUserBoards() {
@@ -91,10 +90,8 @@ export default {
         //     }).catch(handleError)
         // },
         getLists(id) {
-            console.log("hello-1")
             api('boards/' + id + '/lists')
                 .then(res => {
-                    console.log('hello')
                     state.lists = res.data.data
                 })
                 .catch(handleError)
@@ -127,31 +124,28 @@ export default {
         getTasks(id) {
             api('boards/' + id + '/tasks' )
                 .then(res => {
-                    
                     state.tasks = res.data.data
-                    console.log(state.tasks)
                 })
                 .catch(handleError)
         },
         createTask(task) {
             api.post('tasks/', task)
                 .then(res => {
-                    console.log(task)
-                    console.log(task.boardId)
                     this.getTasks(task.boardId)
                 })
                 .catch(handleError)
         },
-        changeTask(id){
-            api.put('tasks/' + id, task)
+        changeTask(boardId, object, id){
+            api.put('tasks/' + id, object)
             .then(res => {
-                this.getTasks()
-            })
+                this.getTasks(boardId)
+            }).catch(handleError)
         },
-        deleteTask(id){
-            api.delete('tasks/' + id)
+        deleteTask(x, y, task){
+            
+            api.delete('tasks/' + x, task)
             .then(res=>{
-                this.getTasks()
+                this.getTasks(y)
             })
             .catch(handleError)
         

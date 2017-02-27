@@ -31,13 +31,11 @@
         },
         methods: {
             createBoardList(name) {
-                console.log(name)
                 this.$root.$data.store.actions.createList({ name: this.name, boardId: this.activeBoard._id })
                 this.name = ''
                 this.$parent.getListsAgain
             },
             showStuff() {
-                console.log('showStuff')
                 if (this.showthing === false) {
                     return this.showthing = true
                 } else {

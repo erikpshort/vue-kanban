@@ -3,14 +3,14 @@
             <span class="white-text" v-on:click="show = !show">+ Task
                     </span>
             <transition name="bounce">
-                <div class="row center" v-if="show">
-                    <form class="col s12" @submit.prevent="createTask(name)" type="submit">
+                <div class="center" v-if="show">
+                    <form @submit.prevent="createTask(name)" type="submit">
                         <div class="row">
-                            <div class="input-field col s12">
+                            <!--<div class="input-field col s12">-->
                                 <div class="card-panel white black-text">
                                     <input type="text" placeholder="New Task Name" v-model="name">
                                 </div>
-                            </div>
+                            <!--</div>-->
                         </div>
                     </form>
                 </div>
@@ -30,8 +30,6 @@
         },
         methods: {
             createTask(name) {
-                debugger
-                console.log(this.list, this.activeBoard)
                 this.$root.$data.store.actions.createTask({ name: this.name, boardId: this.activeBoard._id, listId: this.list._id })
                 this.show = false
                 this.name = ''
@@ -55,7 +53,14 @@
     .bounce-leave-active {
         animation: bounce-out .5s;
     }
-    
+    .white{
+        margin-right:10px;
+        padding: .5%
+    }
+    li{
+        padding-left: 5%;
+        padding-right: 5%
+    }
     @keyframes bounce-in {
         0% {
             transform: scale(0);

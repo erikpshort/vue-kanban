@@ -27,7 +27,6 @@
             getBoard(board) {
                 var x = board._id
                 this.$root.$data.store.actions.setBoard(board)
-                console.log("round3")
                 this.$root.$data.store.actions.getLists(x)
                 this.$root.$data.store.actions.getTasks(x)
 

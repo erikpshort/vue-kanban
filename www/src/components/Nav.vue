@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="red darken-4">
+        <nav class="teal">
             <div class="nav-wrapper">
                 <div>
                     <router-link :to="'/'"><a class="brand-logo black-text"><strong>Jello</strong></a></router-link>
