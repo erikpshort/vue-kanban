@@ -18,7 +18,6 @@
                         <li>
                             <router-link :to="'/boards'">Boards</router-link>
                         </li>
-                        <!--<li><router-link :to="/logout">Log Out</router-link></li>-->
                     </ul>
                 </div>
             </div>
