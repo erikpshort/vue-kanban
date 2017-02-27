@@ -7,14 +7,14 @@ let api = axios.create({
 
 })
 
-api.post('http://localhost:3000/login', {
-    email: 'erik@erik.com',
-    password: 'pw123'
-})
+// api.post('http://localhost:3000/api/login', {
+//     email: 'erik@erik.com',
+//     password: 'pw123'
+// })
 
 //REGISTER ALL DATA HERE
 let state = {
-    showNewBoardForm: false,
+    loggedOut: false,
     boards: [],
     activeBoard: [],
     lists: [],
@@ -24,6 +24,7 @@ let state = {
     checklists: [],
     userBoards:[],
     collabBoards: [],
+    activeUser: [],
     error: {},
     
 }
@@ -38,6 +39,27 @@ export default {
     state,
     //ACTIONS ARE RESPONSIBLE FOR MAKING ALL ASYNC CALLS
     actions: {
+        register(user){
+            api.post('register', user)
+            .then(res=>{
+                state.activeUser = res.data.data
+                state.loggedOut = true
+            }).catch(handleError)
+        },
+        logIn(user){
+            api.post('login', user)
+            .then(res => {
+                state.activeUser = res.data.data
+                state.loggedOut = true
+                console.log('Logged In')
+            }).catch(handleError)
+        },
+        logOut(){
+            api.delete('logOut').then(res => {
+                console.log('Logged Out')
+                state.loggedOut = false
+            }).catch(handleError)
+        },
         getCollabBoards(){
             api('sharedBoards').then(res => {
                 state.collabBoards = res.data.data

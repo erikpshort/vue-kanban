@@ -5,13 +5,13 @@
                 <div>
                     <router-link :to="'/'"><a class="brand-logo black-text"><strong>Jello</strong></a></router-link>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li v-if="!is_loggedIn">
+                        <li v-if="is_loggedIn">
                             <router-link :to="'/login'">
                                 <strong>Log In</strong>
                             </router-link>
                         </li>
-                        <li  v-if="is_loggedIn">
-                            <router-link :to="'/login'">
+                        <li v-if="!is_loggedIn" v-on:click="logOut()">
+                            <router-link :to="'/'">
                                 <strong>Log Out</strong>
                             </router-link>
                         </li>
@@ -32,7 +32,16 @@
         name: 'navBar',
         data() {
             return {
-                is_loggedIn: document.cookie
+            }
+        },
+        methods: {
+            logOut() {
+                this.$root.$data.store.actions.logOut()
+            }
+        },
+        computed:{
+            is_loggedIn(){
+            this.$root.$data.store.state.loggedOut
             }
         }
     }
