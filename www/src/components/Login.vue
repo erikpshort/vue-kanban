@@ -52,6 +52,7 @@
             logIn(email, password) {
                 var user = { email: email, password: password}
                 this.$root.$data.store.actions.logIn(user)
+                this.$router.push('/')
             }
         },
         computed:{

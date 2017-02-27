@@ -1,6 +1,6 @@
 <template>
   <div class="row center">
-    <div class="col s12 offset-m2 m8" v-if="!loggedIn">
+    <div class="col s12 offset-m2 m8" v-if="loggedIn">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title">Register</span>
@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div v-if="loggedIn">
+    <div v-if="!loggedIn">
       <h1>You are currently logged in!</h1>
     </div>
   </div>
@@ -70,7 +70,7 @@
     },
     computed:{
       loggedIn(){
-        this.$root.$data.store.state.loggedOut
+        return this.$root.$data.store.state.loggedOut
       }
     }
   }

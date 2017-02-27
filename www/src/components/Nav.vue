@@ -5,12 +5,12 @@
                 <div>
                     <router-link :to="'/'"><a class="brand-logo black-text"><strong>Jello</strong></a></router-link>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li v-if="is_loggedIn">
+                        <li v-if="loggedOut">
                             <router-link :to="'/login'">
                                 <strong>Log In</strong>
                             </router-link>
                         </li>
-                        <li v-if="!is_loggedIn" v-on:click="logOut()">
+                        <li v-if="!loggedOut" v-on:click="logOut">
                             <router-link :to="'/'">
                                 <strong>Log Out</strong>
                             </router-link>
@@ -37,11 +37,12 @@
         methods: {
             logOut() {
                 this.$root.$data.store.actions.logOut()
+                this.$router.push('/login')
             }
         },
         computed:{
-            is_loggedIn(){
-            this.$root.$data.store.state.loggedOut
+            loggedOut(){
+            return this.$root.$data.store.state.loggedOut
             }
         }
     }

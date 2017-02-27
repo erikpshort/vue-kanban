@@ -27,6 +27,7 @@
         components: { boardForm, collab },
         mounted() {
             this.$root.$data.store.actions.getUserBoards()
+            this.$root.$data.store.actions.getCollabBoards()
         },
         computed: {
             userBoards() {

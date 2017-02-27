@@ -43,21 +43,30 @@ export default {
             api.post('register', user)
             .then(res=>{
                 state.activeUser = res.data.data
-                state.loggedOut = true
+                state.loggedOut = false
             }).catch(handleError)
         },
         logIn(user){
             api.post('login', user)
             .then(res => {
                 state.activeUser = res.data.data
-                state.loggedOut = true
+                state.loggedOut = false
+                this.getCollabBoards()
+                this.getUserBoards()
                 console.log('Logged In')
+                console.log(state.loggedOut)
             }).catch(handleError)
         },
         logOut(){
             api.delete('logOut').then(res => {
-                console.log('Logged Out')
-                state.loggedOut = false
+                state.loggedOut = true
+            }).catch(handleError)
+        },
+        authenticate(){
+            api('authenticate').then(res => {
+                console.log('Authorized')
+                state.activeUser = res.data.data
+                this.getUserBoards()
             }).catch(handleError)
         },
         getCollabBoards(){
