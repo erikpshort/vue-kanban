@@ -5,14 +5,20 @@
                 <div v-if="!is_loggedIn">
                     <a href="#" class="brand-logo black-text"><strong>Jello</strong></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="localhost:3000/#/login" class="black-text"><strong>Log In</strong></a></li>
-                        <li><a href="localhost:3000/#/register" class="black-text"><strong>Register</strong></a></li>
+                        <li>
+                            <router-link :to="'/login'" class="black-text"><strong>Log In</strong></router-link>
+                        </li>
+                        <li>
+                            <router-link :to="'/register'" class="black-text"><strong>Register</strong></router-link>
+                        </li>
                 </div>
                 <div v-if="is_loggedIn">
                     <a href="#" class="brand-logo black-text"><strong>Jello</strong></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="localhost:3000/#/api/boards">Boards</a></li>
-                        <li><a href="#">Log Out</a></li>
+                        <li>
+                            <router-link :to="'/boards'">Boards</router-link>
+                        </li>
+                        <!--<li><router-link :to="/logout">Log Out</router-link></li>-->
                     </ul>
                 </div>
             </div>

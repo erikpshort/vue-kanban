@@ -22,7 +22,7 @@
                                 <button class="btn waves-effect waves-light" type="submit" name="action">Login
                                 <i class="material-icons right">send</i>
                             </button><br><br>
-                                <span>Need to Remember?<router-link to="/register"><br>Register here</router-link></span>
+                                <span>Need to Register?<router-link to="/register"><br>Register here</router-link></span>
                             </div>
                         </form>
                     </div>
