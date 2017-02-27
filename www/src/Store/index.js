@@ -2,19 +2,19 @@ import axios from 'axios'
 
 let api = axios.create({
     baseURL: 'http://localhost:3000/api/',
-    timeout: 20000,
+    timeout: 3500,
     withCredentials: true
 
 })
 
-// api.post('http://localhost:3000/api/login', {
-//     email: 'erik@erik.com',
-//     password: 'pw123'
-// })
+api.post('http://localhost:3000/login', {
+    email: 'erik@erik.com',
+    password: 'pw123'
+})
 
 //REGISTER ALL DATA HERE
 let state = {
-    loggedOut: false,
+    showNewBoardForm: false,
     boards: [],
     activeBoard: [],
     lists: [],
@@ -24,7 +24,6 @@ let state = {
     checklists: [],
     userBoards:[],
     collabBoards: [],
-    activeUser: [],
     error: {},
     
 }
@@ -39,30 +38,10 @@ export default {
     state,
     //ACTIONS ARE RESPONSIBLE FOR MAKING ALL ASYNC CALLS
     actions: {
-        register(user){
-            api.post('register', user)
-            .then(res=>{
-                state.activeUser = res.data.data
-                state.loggedOut = true
-            }).catch(handleError)
-        },
-        logIn(user){
-            api.post('login', user)
-            .then(res => {
-                state.activeUser = res.data.data
-                state.loggedOut = true
-                console.log('Logged In')
-            }).catch(handleError)
-        },
-        logOut(){
-            api.delete('logOut').then(res => {
-                console.log('Logged Out')
-                state.loggedOut = false
-            }).catch(handleError)
-        },
         getCollabBoards(){
             api('sharedBoards').then(res => {
                 state.collabBoards = res.data.data
+                console.log(res.data.data)
             }).catch(handleError)
         },
         getUserBoards() {
@@ -82,9 +61,6 @@ export default {
                 state.activeBoard = res.data.data
                 })
                 .catch(handleError)
-        },
-        setBoard(board){
-            state.activeBoard = board
         },
         createBoard(board) {
             api.post('boards', board)
@@ -112,8 +88,10 @@ export default {
         //     }).catch(handleError)
         // },
         getLists(id) {
+            console.log("hello-1")
             api('boards/' + id + '/lists')
                 .then(res => {
+                    console.log('hello')
                     state.lists = res.data.data
                 })
                 .catch(handleError)
@@ -138,36 +116,34 @@ export default {
             })
             .catch(handleError)
         },
-        // getTasks() {
-        //     api('tasks').then(res => {
-        //         state.tasks = res.data.data
-        //     }).catch(handleError)
-        // },
-        getTasks(id) {
-            api('boards/' + id + '/tasks' )
-                .then(res => {
-                    state.tasks = res.data.data
-                })
-                .catch(handleError)
-        },
-        createTask(task) {
-            api.post('tasks/', task)
-                .then(res => {
-                    this.getTasks(task.boardId)
-                })
-                .catch(handleError)
-        },
-        changeTask(boardId, object, id){
-            api.put('tasks/' + id, object)
-            .then(res => {
-                this.getTasks(boardId)
+        getTasks() {
+            api('tasks').then(res => {
+                state.tasks = res.data.data
             }).catch(handleError)
         },
-        deleteTask(x, y, task){
-            
-            api.delete('tasks/' + x, task)
+        getTask(id) {
+            api('tasks/' + id)
+                .then(res => {
+                })
+                .catch(handleError)
+        },
+        createTask(id) {
+            api.post('tasks/' + id, task)
+                .then(res => {
+                    this.getTasks()
+                })
+                .catch(handleError)
+        },
+        changeTask(id){
+            api.put('tasks/' + id, task)
+            .then(res => {
+                this.getTasks()
+            })
+        },
+        deleteTask(id){
+            api.delete('tasks/' + id)
             .then(res=>{
-                this.getTasks(y)
+                this.getTasks()
             })
             .catch(handleError)
         

@@ -1,24 +1,22 @@
 <template>
     <div>
-        <nav class="teal">
+        <nav class="red darken-4">
             <div class="nav-wrapper">
-                <div>
-                    <router-link :to="'/'"><a class="brand-logo black-text"><strong>Jello</strong></a></router-link>
+                <div v-if="!is_loggedIn">
+                    <a href="#" class="brand-logo black-text"><strong>Jello</strong></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li v-if="is_loggedIn">
-                            <router-link :to="'/login'">
-                                <strong>Log In</strong>
-                            </router-link>
-                        </li>
-                        <li v-if="!is_loggedIn" v-on:click="logOut()">
-                            <router-link :to="'/'">
-                                <strong>Log Out</strong>
-                            </router-link>
+                        <li>
+                            <router-link :to="'/login'" class="black-text"><strong>Log In</strong></router-link>
                         </li>
                         <li>
-                            <router-link :to="'/register'">
-                                <strong>Register</strong>
-                            </router-link>
+                            <router-link :to="'/register'" class="black-text"><strong>Register</strong></router-link>
+                        </li>
+                </div>
+                <div v-if="is_loggedIn">
+                    <a href="#" class="brand-logo black-text"><strong>Jello</strong></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li>
+                            <router-link :to="'/boards'">Boards</router-link>
                         </li>
                     </ul>
                 </div>
@@ -32,16 +30,7 @@
         name: 'navBar',
         data() {
             return {
-            }
-        },
-        methods: {
-            logOut() {
-                this.$root.$data.store.actions.logOut()
-            }
-        },
-        computed:{
-            is_loggedIn(){
-            this.$root.$data.store.state.loggedOut
+                is_loggedIn: false
             }
         }
     }

@@ -1,8 +1,8 @@
 <template>
     <div id="boards">
-        <div>
+        <div class="row">
             <h1 class="center">{{activeBoard.name}}</h1>
-            <lists :board="activeBoard"></lists>
+            <lists></lists>
         </div>
     </div>
 </template>
@@ -11,8 +11,7 @@
 
 
 <script>
-import lists from './Lists'
-
+import lists from './List'
     export default {
         name: 'board',
         components: {lists},
@@ -25,10 +24,7 @@ import lists from './Lists'
             activeBoard(){
                 return this.$root.$data.store.state.activeBoard
             }
-        },mounted(){
-            this.$root.$data.store.actions.getLists(this.activeBoard._id)
-            this.$root.$data.store.actions.getTasks(this.activeBoard._id)
-        }
+        },
     }
 
 </script>

@@ -1,12 +1,12 @@
 <template>
     <div class="row">
         <h1 v-if="collab" class="center">Collaborating Boards</h1>
-        <div class="col xs12 s6 m2" v-for="(board, i) in collab">
+        <div class="col xs12 s6 m2" v-for="(board, i) in collab" >
             <router-link :to="'/board'">
-                <div class="card-panel teal" @click="getBoard(board)">
-                    <span class="white-text">{{board.name}}
+            <div class="card-panel teal" @click="getBoard(board)">
+                <span class="white-text">{{board.name}}
                     </span>
-                </div>
+            </div>
             </router-link>
         </div>
     </div>
@@ -26,9 +26,9 @@
         methods: {
             getBoard(board) {
                 var x = board._id
-                this.$root.$data.store.actions.setBoard(board)
+                this.$root.$data.store.actions.getBoard(x)
+                console.log("round3")
                 this.$root.$data.store.actions.getLists(x)
-                this.$root.$data.store.actions.getTasks(x)
 
             }
 

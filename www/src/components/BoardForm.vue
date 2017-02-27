@@ -32,6 +32,7 @@
         },
         methods: {
             createUserBoard(name) {
+                debugger
                 this.$root.$data.store.actions.createBoard({ name: this.name })
                 this.show = false
                 this.name = ''
